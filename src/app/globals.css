@@ -1,26 +1,124 @@
-@import "tailwindcss";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --foreground-rgb: 0, 0, 0;
+  --background-start-rgb: 248, 250, 252;
+  --background-end-rgb: 255, 255, 255;
+  --primary: 37, 99, 235;
+  --primary-foreground: 255, 255, 255;
+  --destructive: 220, 38, 38;
+  --destructive-foreground: 255, 255, 255;
+  --muted: 241, 245, 249;
+  --muted-foreground: 100, 116, 139;
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --foreground-rgb: 255, 255, 255;
+    --background-start-rgb: 15, 23, 42;
+    --background-end-rgb: 30, 41, 59;
+    --primary: 59, 130, 246;
+    --primary-foreground: 255, 255, 255;
+    --destructive: 248, 113, 113;
+    --destructive-foreground: 15, 23, 42;
+    --muted: 51, 65, 85;
+    --muted-foreground: 148, 163, 184;
   }
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  color: rgb(var(--foreground-rgb));
+  background: linear-gradient(to bottom, transparent, rgb(var(--background-end-rgb))) rgb(var(--background-start-rgb));
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgb(var(--muted));
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgb(var(--primary), 0.5);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgb(var(--primary), 0.7);
+}
+
+/* Form element focus styles */
+input:focus,
+textarea:focus,
+select:focus {
+  outline: 2px solid rgb(var(--primary), 0.5);
+  outline-offset: 2px;
+}
+
+/* Custom animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.animate-fadeIn {
+  animation: fadeIn 0.5s ease-in-out;
+}
+
+/* Toast notification styles */
+.toast-enter {
+  transform: translateX(100%);
+}
+
+.toast-enter-active {
+  transform: translateX(0);
+  transition: transform 300ms;
+}
+
+.toast-exit {
+  transform: translateX(0);
+}
+
+.toast-exit-active {
+  transform: translateX(100%);
+  transition: transform 300ms;
+}
+
+/* Responsive table styles */
+@media (max-width: 640px) {
+  .responsive-table-container {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+}
+
+/* Print styles for reservations */
+@media print {
+  body {
+    background: white;
+    color: black;
+  }
+
+  .no-print {
+    display: none;
+  }
+
+  .print-only {
+    display: block;
+  }
+
+  .reservation-details {
+    padding: 1rem;
+    border: 1px solid #ddd;
+  }
 }
